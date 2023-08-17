@@ -1,0 +1,54 @@
+div {
+    display: none;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: initial;
+    user-select: none;
+    -webkit-user-select: none;
+
+    z-index: 10;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: var(--blur-background);
+    box-shadow: var(--inset-shadow);
+    border-radius: 12px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    animation-name: popup-fadein;
+    animation-duration: 300ms;
+    animation-fill-mode: backwards;
+
+    & span, & a {
+        padding: 12px 20px;
+    }
+
+    & span {
+        cursor: default;
+    }
+
+    & a {
+        color: white;
+        text-decoration: none;
+        transition: 300ms;
+    }
+
+    & a:hover {
+        background: var(--hover-background);
+        transition: 100ms;
+    }
+}
+
+@keyframes popup-fadein {
+    0% {
+        transform: translate(-50%, 10%);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}

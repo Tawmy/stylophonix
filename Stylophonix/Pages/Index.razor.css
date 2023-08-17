@@ -28,14 +28,9 @@
     margin: 25px 25px 0 25px;
     padding: 24px 20px 12px 20px;
 
-    background: rgba(255, 255, 255, 0.075);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    background: var(--blur-background);
+    box-shadow: var(--inset-shadow);
     border-radius: 12px;
-
-    animation-name: fadein;
-    animation-duration: 2500ms;
-    animation-delay: 3000ms;
-    animation-fill-mode: backwards;
 
     & span {
         font-size: 140%;
@@ -66,10 +61,17 @@
         }
 
         & a:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--hover-background);
             transition: 100ms;
         }
     }
+}
+
+.social-animate {
+    animation-name: fadein;
+    animation-duration: 2500ms;
+    animation-delay: 3000ms;
+    animation-fill-mode: backwards;
 }
 
 #social-link-Twitter img {

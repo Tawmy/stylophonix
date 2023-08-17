@@ -1,9 +1,11 @@
 ﻿@page "/"
 @using Stylophonix.Data
+@using Stylophonix.Interfaces
+@inject IAnimationService AnimationService
 
 <div id="band-photo"></div>
 
-<div id="social">
+<div id="social" class="@(AnimationService.ShouldAnimate() ? "social-animate" : string.Empty)">
     <span>Follow us on:</span>
     <div id="social-links">
         @foreach (var socialOption in _socialOptions)
@@ -18,12 +20,12 @@
 
 @code
 {
-    private readonly List<NavOption> _socialOptions = new()
+    private readonly List<SocialOption> _socialOptions = new()
     {
-        new NavOption("https://www.facebook.com/stylophonix", "img/icons/f_logo_RGB-White_1024.svg", "Facebook"),
-        new NavOption("https://www.twitter.com/stylophonix1", "img/icons/x-logo.svg", "Twitter"),
-        new NavOption("https://www.instagram.com/stylophonix", "img/icons/Instagram_Glyph_White.svg", "Instagram"),
-        new NavOption("https://www.reverbnation.com/stylophonix", "img/icons/reverbnation.svg", "Reverbnation"),
-        new NavOption("https://www.soundcloud.com/stylophonix", "img/icons/SoundCloud_-_Logo.svg", "SoundCloud")
+        new SocialOption("Facebook", "img/icons/f_logo_RGB-White_1024.svg", "https://www.facebook.com/stylophonix"),
+        new SocialOption("Twitter", "img/icons/x-logo.svg", "https://www.twitter.com/stylophonix1"),
+        new SocialOption("Instagram", "img/icons/Instagram_Glyph_White.svg", "https://www.instagram.com/stylophonix"),
+        new SocialOption("Reverbnation", "img/icons/reverbnation.svg", "https://www.reverbnation.com/stylophonix"),
+        new SocialOption("SoundCloud", "img/icons/SoundCloud_-_Logo.svg", "https://www.soundcloud.com/stylophonix")
     };
 }

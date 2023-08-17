@@ -1,0 +1,38 @@
+@using Stylophonix.Data
+<div style="display: @GetDisplayProperty()">
+    @foreach (var o in PopupMenuOptions)
+    {
+        @if (o.Url != null)
+        {
+            <a href="@o.Url">@((MarkupString) GetFormattedText(o))</a>
+        }
+        else
+        {
+            <span>@((MarkupString) GetFormattedText(o))</span>
+        }
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public required IEnumerable<PopupMenuOption> PopupMenuOptions { get; set; } = new List<PopupMenuOption>();
+
+    public bool IsVisible { get; set; }
+
+    private string GetDisplayProperty()
+    {
+        return IsVisible ? "grid" : "none";
+    }
+
+    private static string GetFormattedText(PopupMenuOption o)
+    {
+        var s = $"{(o.Bold ? "<b>" : string.Empty)}{o.Title}{(o.Bold ? "</b>" : string.Empty)}";
+        if (o.Subtitle != null)
+        {
+            s = $"{s}<br />{o.Subtitle}";
+        }
+        return s;
+    }
+
+}

@@ -1,33 +1,73 @@
 @using Stylophonix.Data
+@using Stylophonix.Interfaces
 @inject NavigationManager NavManager
+@inject IAnimationService AnimationService
 
-<nav class="@(PageTitle() ? "nav-animate" : "")">
-    @foreach (var navOption in _navOptions)
+<nav class="@(AnimationService.ShouldAnimate() ? "nav-animate" : string.Empty)" @onmouseleave="ClosePopups">
+    @foreach (var navOption in NavOptions)
     {
-        <a href="@navOption.DestinationUrl">
+        <a @onmouseenter="@(_ => OpenPopup(navOption))" @onclick="@(_ => OpenUrl(navOption))">
             <img src="@navOption.IconUrl" alt="@navOption.Text"/>
-            <div class="nav-popup">
-                @navOption.Text
-            </div>
+            @if (navOption.Options != null)
+            {
+                <PopupMenu PopupMenuOptions=@navOption.Options @ref="@navOption.PopupMenu"/>
+            }
         </a>
     }
 </nav>
 
 @code {
 
-    private readonly List<NavOption> _navOptions = new()
+    private static List<PopupMenuOption> OptionsDownload => new()
     {
-        new NavOption("news", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "News"),
-        new NavOption("https://stylophonix.de/news.html", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", "Images"),
-        new NavOption("https://stylophonix.de/news.html", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "Band"),
-        new NavOption("https://stylophonix.de/news.html", "img/icons/settings_input_antenna_FILL0_wght400_GRAD0_opsz48.svg", "Live"),
-        new NavOption("https://stylophonix.de/news.html", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", "Downloads")
+        new PopupMenuOption("Downloads", true),
+        new PopupMenuOption("Photo", false, Url: "https://www.stylophonix.de/downloads/stylo22.jpg"),
+        new PopupMenuOption("Info", false, Url: "https://www.stylophonix.de/downloads/info-2022.pdf"),
+        new PopupMenuOption("Technical Rider", false, Url: "https://www.stylophonix.de/downloads/technicalriderstylophonixduo2022-12-11.pdf"),
+        new PopupMenuOption("Stageplan", false, Url: "https://www.stylophonix.de/downloads/stylophonixstageplanduo22.pdf")
     };
 
-    bool PageTitle()
+    private List<NavOption> NavOptions { get; set; } = new()
     {
-        var relPath = NavManager.ToBaseRelativePath(NavManager.Uri);
-        return string.IsNullOrWhiteSpace(relPath);
+        new NavOption("News", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "news"),
+        new NavOption("Images", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", "pics"),
+        new NavOption("Band", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "https://stylophonix.de/news.html"),
+        new NavOption("Live", "img/icons/settings_input_antenna_FILL0_wght400_GRAD0_opsz48.svg", "https://stylophonix.de/news.html"),
+        new NavOption("Downloads", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", OptionsDownload)
+    };
+
+    private void OpenPopup(NavOption navOption)
+    {
+        CloseOtherPopups(navOption);
+
+        if (navOption.PopupMenu != null)
+        {
+            navOption.PopupMenu.IsVisible = true;
+        }
+    }
+
+    private void ClosePopups()
+    {
+        foreach (var navOption in NavOptions.Where(x => x.PopupMenu != null))
+        {
+            navOption.PopupMenu!.IsVisible = false;
+        }
+    }
+
+    private void CloseOtherPopups(NavOption option)
+    {
+        foreach (var navOption in NavOptions.Where(x => x.PopupMenu != null && x != option))
+        {
+            navOption.PopupMenu!.IsVisible = false;
+        }
+    }
+
+    private void OpenUrl(NavOption option)
+    {
+        if (option.DestinationUrl != null)
+        {
+            NavManager.NavigateTo(option.DestinationUrl);
+        }
     }
 
 }
