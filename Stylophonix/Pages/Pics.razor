@@ -59,7 +59,8 @@ else
         var files = Directory.GetFiles(submittedDirectory);
         var filesPrepared = files.Where(x =>
             x.EndsWith(".jpg") || x.EndsWith(".jpeg") || x.EndsWith(".png") || x.EndsWith(".webp") || x.EndsWith(".avif"))
-            .Select(x => $"img/pics/{Gig}/{Path.GetFileName(x)}");
+            .Select(x => $"img/pics/{Gig}/{Path.GetFileName(x)}")
+            .OrderBy(x => x);
         return filesPrepared;
     }
 
