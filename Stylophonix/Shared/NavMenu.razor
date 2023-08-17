@@ -1,0 +1,25 @@
+@using Stylophonix.Data
+<nav>
+    @foreach (var navOption in _icons)
+    {
+        <a href="@navOption.DestinationUrl">
+            <img src="@navOption.IconUrl" alt="@navOption.Text"/>
+            <div class="nav-popup">
+                @navOption.Text
+            </div>
+        </a>
+    }
+</nav>
+
+@code {
+
+    private List<NavOption> _icons = new()
+    {
+        new NavOption("https://stylophonix.de/news.html", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "News"),
+        new NavOption("https://stylophonix.de/news.html", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", "Images"),
+        new NavOption("https://stylophonix.de/news.html", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "Band"),
+        new NavOption("https://stylophonix.de/news.html", "img/icons/settings_input_antenna_FILL0_wght400_GRAD0_opsz48.svg", "Live"),
+        new NavOption("https://stylophonix.de/news.html", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", "Downloads")
+    };
+
+}

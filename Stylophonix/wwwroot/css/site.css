@@ -26,3 +26,27 @@
 .blazor-error-boundary::after {
     content: "An error has occurred."
 }
+
+:root {
+    --color: white;
+}
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    color: var(--color);
+}
+
+main {
+    display: grid;
+    justify-items: center;
+}
+
+img {
+    max-width: 100%;
+}
