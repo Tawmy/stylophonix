@@ -18,6 +18,14 @@
 
 @code {
 
+    private static List<PopupMenuOption> OptionsPics => new()
+    {
+        new PopupMenuOption("Live", true),
+        new PopupMenuOption("World Premiere", true, "2018", "pics/2018-world-premiere"),
+        new PopupMenuOption("Draußen nur Kännchen", true, "2019", "pics/2019-draussen-kaennchen"),
+        new PopupMenuOption("Boom the Room", true, "2022", "pics/2022-boom-the-room")
+    };
+
     private static List<PopupMenuOption> OptionsDownload => new()
     {
         new PopupMenuOption("Downloads", true),
@@ -30,7 +38,7 @@
     private List<NavOption> NavOptions { get; set; } = new()
     {
         new NavOption("News", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "news"),
-        new NavOption("Images", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", "pics"),
+        new NavOption("Images", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", OptionsPics),
         new NavOption("Band", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "https://stylophonix.de/news.html"),
         new NavOption("Live", "img/icons/settings_input_antenna_FILL0_wght400_GRAD0_opsz48.svg", "https://stylophonix.de/news.html"),
         new NavOption("Downloads", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", OptionsDownload)

@@ -1,0 +1,66 @@
+@page "/pics/{gig}"
+@using Stylophonix.Data
+@inject NavigationManager NavManager
+
+@if (Gig != null && LoadGigInfo() is {} gigInfo)
+{
+    <div id="gig-info">
+        <span>@gigInfo.Title</span>
+        <span>@gigInfo.Subtitle</span>
+    </div>
+
+    <div id="pics">
+        @foreach (var fileUrl in GetFileUrls())
+        {
+            <img src="@fileUrl" alt="@Path.GetFileNameWithoutExtension(fileUrl)"/>
+        }
+    </div>
+}
+else
+{
+    <span>Es existiert kein Gig mit diesem Titel.</span>
+}
+
+@code {
+
+    [Parameter]
+    public string? Gig { get; set; }
+
+    private GigInfo? LoadGigInfo()
+    {
+        if (Gig == null)
+        {
+            return null;
+        }
+
+        try
+        {
+            var wwwroot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pics");
+            var submittedDirectory = Path.Combine(wwwroot, Gig);
+            var lines = File.ReadLines(Path.Combine(submittedDirectory, "info.txt")).ToArray();
+            return new GigInfo(lines[0], lines[1]);
+        }
+        catch (Exception e) when (e is DirectoryNotFoundException or FileNotFoundException)
+        {
+        }
+
+        return null;
+    }
+
+    private IEnumerable<string> GetFileUrls()
+    {
+        if (Gig == null)
+        {
+            return Array.Empty<string>();
+        }
+
+        var wwwroot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pics");
+        var submittedDirectory = Path.Combine(wwwroot, Gig);
+        var files = Directory.GetFiles(submittedDirectory);
+        var filesPrepared = files.Where(x =>
+            x.EndsWith(".jpg") || x.EndsWith(".jpeg") || x.EndsWith(".png") || x.EndsWith(".webp") || x.EndsWith(".avif"))
+            .Select(x => $"img/pics/{Gig}/{Path.GetFileName(x)}");
+        return filesPrepared;
+    }
+
+}

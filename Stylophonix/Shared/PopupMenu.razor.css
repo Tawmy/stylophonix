@@ -30,6 +30,11 @@ div {
         cursor: default;
     }
 
+    & span:first-of-type {
+        font-size: 120%;
+        text-align: center;
+    }
+
     & a {
         color: white;
         text-decoration: none;
