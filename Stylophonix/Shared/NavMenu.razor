@@ -1,6 +1,6 @@
 @using Stylophonix.Data
 <nav>
-    @foreach (var navOption in _icons)
+    @foreach (var navOption in _navOptions)
     {
         <a href="@navOption.DestinationUrl">
             <img src="@navOption.IconUrl" alt="@navOption.Text"/>
@@ -13,7 +13,7 @@
 
 @code {
 
-    private List<NavOption> _icons = new()
+    private readonly List<NavOption> _navOptions = new()
     {
         new NavOption("https://stylophonix.de/news.html", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "News"),
         new NavOption("https://stylophonix.de/news.html", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", "Images"),
