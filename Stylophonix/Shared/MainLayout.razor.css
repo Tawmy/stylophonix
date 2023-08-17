@@ -3,6 +3,11 @@
     justify-content: center;
     margin-bottom: 20px;
 
+    animation-name: fadein;
+    animation-duration: 2500ms;
+    animation-delay: 2000ms;
+    animation-fill-mode: both;
+
     & img {
         width: 80%;
         max-width: 580px;

@@ -12,6 +12,11 @@ nav {
     display: flex;
     justify-content: space-around;
 
+    animation-name: nav-fadein;
+    animation-duration: 2500ms;
+    animation-delay: 2500ms;
+    animation-fill-mode: both;
+
     & img {
         filter: invert(100%);
         transform: scale(0.8);
@@ -83,4 +88,15 @@ nav > a:hover > .nav-popup {
     backdrop-filter: blur(20px);
     border: 2px solid rgba(255, 255, 255, 0.9);
     transform: skew(-10deg);
+}
+
+@keyframes nav-fadein {
+    0% {
+        transform: translate(-50%, 30%);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
 }
