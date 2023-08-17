@@ -1,8 +1,18 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager NavManager
 
-<div id="logo">
+<a href="/" id="logo" class="@(PageTitle() ? "logo-fadein" : "")">
     <img src="img/photos/stylophonix_logo.png" alt="Stylophonix Logo"/>
-</div>
+</a>
 
 <main> @Body </main>
 <NavMenu/>
+
+@code
+{
+    bool PageTitle()
+    {
+        var relPath = NavManager.ToBaseRelativePath(NavManager.Uri);
+        return string.IsNullOrWhiteSpace(relPath);
+    }
+}

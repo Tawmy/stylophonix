@@ -1,5 +1,7 @@
 @using Stylophonix.Data
-<nav>
+@inject NavigationManager NavManager
+
+<nav class="@(PageTitle() ? "nav-animate" : "")">
     @foreach (var navOption in _navOptions)
     {
         <a href="@navOption.DestinationUrl">
@@ -15,11 +17,17 @@
 
     private readonly List<NavOption> _navOptions = new()
     {
-        new NavOption("https://stylophonix.de/news.html", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "News"),
+        new NavOption("news", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "News"),
         new NavOption("https://stylophonix.de/news.html", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", "Images"),
         new NavOption("https://stylophonix.de/news.html", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "Band"),
         new NavOption("https://stylophonix.de/news.html", "img/icons/settings_input_antenna_FILL0_wght400_GRAD0_opsz48.svg", "Live"),
         new NavOption("https://stylophonix.de/news.html", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", "Downloads")
     };
+
+    bool PageTitle()
+    {
+        var relPath = NavManager.ToBaseRelativePath(NavManager.Uri);
+        return string.IsNullOrWhiteSpace(relPath);
+    }
 
 }

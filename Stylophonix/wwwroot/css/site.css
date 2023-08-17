@@ -45,6 +45,7 @@ body {
 main {
     display: grid;
     justify-items: center;
+    margin-bottom: 100px;
 }
 
 img {
