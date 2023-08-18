@@ -1,0 +1,27 @@
+@page "/lineup"
+@using Stylophonix.Data
+<h1>Lineup</h1>
+
+<div id="members">
+    @foreach (var member in Members)
+    {
+        <div class="member">
+            <img src="@member.PhotoUrl" alt="@member.Name"/>
+            <span>@member.Name</span>
+            <span>
+                @string.Join(" • ", member.Instruments)
+            </span>
+        </div>
+    }
+</div>
+
+@code {
+
+    private static IEnumerable<Member> Members => new List<Member>
+    {
+        new("SCHÜRMI", "img/lineup/sch19.jpg", new[] {"VOX", "GIT", "DRUMS"}),
+        new("MATTHES", "img/lineup/mat19.jpg", new[] {"VOX", "GIT", "DRUMS", "STYLOPHONES"}),
+        new("DITZE", "img/lineup/dit19.jpg", new[] {"VOX", "BASS", "LOOPS"})
+    };
+
+}

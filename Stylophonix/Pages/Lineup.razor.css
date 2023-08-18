@@ -1,0 +1,26 @@
+#members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+
+    margin: 0 25px;
+}
+
+.member {
+    display: grid;
+    gap: 25px;
+    justify-items: center;
+
+    max-width: calc(100vw - 50px);
+    width: 280px;
+    padding: 20px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+
+    & span:first-of-type {
+        font-size: 140%;
+        font-weight: bold;
+    }
+}
