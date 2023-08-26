@@ -18,12 +18,12 @@
 
 @code {
 
-    private static List<PopupMenuOption> OptionsPics => new()
+    private static List<PopupMenuOption> OptionsGigs => new()
     {
-        new PopupMenuOption("Live", true),
-        new PopupMenuOption("World Premiere", true, "2018", "pics/2018-world-premiere"),
-        new PopupMenuOption("Draußen nur Kännchen", true, "2019", "pics/2019-draussen-kaennchen"),
-        new PopupMenuOption("Boom the Room", true, "2022", "pics/2022-boom-the-room")
+        new PopupMenuOption("Gigs", true),
+        new PopupMenuOption("World Premiere", true, "13.10.2018", "gigs/2018-world-premiere"),
+        new PopupMenuOption("Draußen nur Kännchen", true, "06.07.2019", "gigs/2019-draussen-kaennchen"),
+        new PopupMenuOption("Boom the Room", true, "03.09.2022", "gigs/2022-boom-the-room")
     };
 
     private static List<PopupMenuOption> OptionsDownload => new()
@@ -38,9 +38,8 @@
     private List<NavOption> NavOptions { get; set; } = new()
     {
         new NavOption("News", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "news"),
-        new NavOption("Images", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", OptionsPics),
+        new NavOption("Gigs", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", OptionsGigs),
         new NavOption("Band", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "lineup"),
-        new NavOption("Live", "img/icons/settings_input_antenna_FILL0_wght400_GRAD0_opsz48.svg", "https://stylophonix.de/news.html"),
         new NavOption("Downloads", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", OptionsDownload)
     };
 

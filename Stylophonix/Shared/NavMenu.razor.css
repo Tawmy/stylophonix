@@ -7,7 +7,7 @@ nav {
     transform: translateX(-50%);
     height: var(--nav-height);
     width: calc(100% - var(--nav-height));
-    max-width: 650px;
+    max-width: 500px;
 
     display: flex;
     justify-content: space-around;
