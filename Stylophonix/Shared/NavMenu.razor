@@ -4,16 +4,19 @@
 @inject IAnimationService AnimationService
 
 <nav class="@(AnimationService.ShouldAnimate() ? "nav-animate" : string.Empty)" @onmouseleave="ClosePopups">
-    @foreach (var navOption in NavOptions)
-    {
-        <a @onmouseenter="@(_ => OpenPopup(navOption))" @onclick="@(_ => OpenUrl(navOption))">
-            <img src="@navOption.IconUrl" alt="@navOption.Text"/>
-            @if (navOption.Options != null)
-            {
-                <PopupMenu PopupMenuOptions=@navOption.Options @ref="@navOption.PopupMenu"/>
-            }
-        </a>
-    }
+    <div>
+        @foreach (var navOption in NavOptions)
+        {
+            <a @onmouseenter="@(_ => OpenPopup(navOption))" @onmousedown="@(_ => OpenPopup(navOption))" @onclick="@(_ => OpenUrl(navOption))">
+                <img src="@navOption.IconUrl" alt="@navOption.Text"/>
+                <span>@navOption.Text</span>
+                @if (navOption.Options != null)
+                {
+                    <PopupMenu PopupMenuOptions=@navOption.Options @ref="@navOption.PopupMenu"/>
+                }
+            </a>
+        }
+    </div>
 </nav>
 
 @code {
@@ -39,7 +42,7 @@
     {
         new NavOption("News", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "news"),
         new NavOption("Gigs", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", OptionsGigs),
-        new NavOption("Band", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "lineup"),
+        new NavOption("Lineup", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "lineup"),
         new NavOption("Downloads", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", OptionsDownload)
     };
 
@@ -71,10 +74,10 @@
 
     private void OpenUrl(NavOption option)
     {
-        if (option.DestinationUrl != null)
-        {
-            NavManager.NavigateTo(option.DestinationUrl);
-        }
+        if (option.DestinationUrl == null) return;
+
+        ClosePopups();
+        NavManager.NavigateTo(option.DestinationUrl);
     }
 
 }

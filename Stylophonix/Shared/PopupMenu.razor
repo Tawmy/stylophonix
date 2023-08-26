@@ -4,7 +4,7 @@
     {
         @if (o.Url != null)
         {
-            <a href="@o.Url">@((MarkupString) GetFormattedText(o))</a>
+            <a href="@o.Url" @onclick="@(_ => IsVisible = false)">@((MarkupString) GetFormattedText(o))</a>
         }
         else
         {

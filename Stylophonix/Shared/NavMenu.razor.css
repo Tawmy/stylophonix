@@ -1,30 +1,51 @@
 nav {
-    --nav-height: 50px;
-
     position: fixed;
-    bottom: calc(var(--nav-height) / 2);
+    bottom: var(--main-margin);
     left: 50%;
     transform: translateX(-50%);
     height: var(--nav-height);
-    width: calc(100% - var(--nav-height));
+    width: min(calc(100% - var(--main-margin)));
     max-width: 500px;
 
-    display: flex;
-    justify-content: space-around;
-
-    & img {
-        filter: invert(100%);
-        transform: scale(0.8);
+    @media only screen and (min-width: 500px) {
+        width: min(calc(100% - calc(var(--main-margin) * 2)));
     }
 
-    & a {
-        position: relative;
-        text-decoration: none;
-        cursor: pointer;
-    }
+    > div {
+        display: flex;
+        justify-content: space-around;
 
-    & a:nth-of-type(4) img {
-        transform: scale(0.675);
+        transform: translateY(-7px);
+
+        @media only screen and (min-width: 500px) {
+            transform: unset;
+        }
+
+        & img {
+            filter: invert(100%);
+            transform: scale(0.8);
+        }
+
+        & a {
+            display: grid;
+            justify-items: center;
+
+            position: relative;
+            text-decoration: none;
+            cursor: pointer;
+
+            @media only screen and (min-width: 500px) {
+                transform: unset;
+            }
+
+            > span {
+                font-size: 75%;
+
+                @media only screen and (min-width: 500px) {
+                    display: none;
+                }
+            }
+        }
     }
 }
 
@@ -37,11 +58,16 @@ nav:before {
     height: 140%;
     content: '';
     border-radius: 12px;
-    transform: skew(-20deg);
     background: var(--blur-background);
     box-shadow: var(--inset-shadow);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+}
+
+@media only screen and (min-width: 500px) {
+    nav:before {
+        transform: skew(-20deg);
+    }
 }
 
 .nav-animate {

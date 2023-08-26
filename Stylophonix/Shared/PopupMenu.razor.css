@@ -7,7 +7,7 @@ div {
     -webkit-user-select: none;
 
     z-index: 10;
-    position: absolute;
+    position: fixed;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
@@ -22,8 +22,16 @@ div {
     animation-duration: 300ms;
     animation-fill-mode: backwards;
 
+    @media only screen and (min-width: 500px) {
+        position: absolute;
+    }
+
     & span, & a {
-        padding: 12px 20px;
+        padding: 1em 1.6em;
+
+        @media only screen and (min-width: 500px) {
+            padding: 0.8em 1.33em;
+        }
     }
 
     & span {
