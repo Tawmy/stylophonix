@@ -1,6 +1,7 @@
 #band-photo {
     position: relative;
     width: 567px;
+    max-width: 100vw;
     height: 319px;
     background: url("img/photos/Stylophonixklein19_black_initial.webp");
 }
