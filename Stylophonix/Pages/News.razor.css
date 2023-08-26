@@ -1,5 +1,5 @@
 span {
-    margin-top: 20px;
+    margin: 20px var(--main-margin) 0 var(--main-margin);
     line-height: 2;
     text-align: center;
 }

@@ -1,11 +1,10 @@
 #logo {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin: var(--main-margin) 0;
 
-    & img {
-        width: 80%;
-        max-width: 580px;
+    & img {;
+        width: min(580px, calc(100vw - var(--main-margin)));
     }
 }
 

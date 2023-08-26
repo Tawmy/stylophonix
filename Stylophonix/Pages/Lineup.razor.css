@@ -4,7 +4,7 @@
     justify-content: center;
     gap: 50px;
 
-    margin: 0 25px;
+    margin: 0 var(--main-margin);
 }
 
 .member {
