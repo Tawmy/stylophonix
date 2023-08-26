@@ -3,7 +3,7 @@ services:
     networks:
       - caddy
     labels:
-      caddy: stylophonix.xyz
+      caddy: stylophonix.xyz, stylophonix.dev.tawmy.dev
       caddy.reverse_proxy: "{{upstreams 80}}"
 
 networks:
