@@ -1,0 +1,11 @@
+services:
+  stylophonix:
+    networks:
+      - caddy
+    labels:
+      caddy: stylophonix.xyz
+      caddy.reverse_proxy: "{{upstreams 80}}"
+
+networks:
+  caddy:
+    external: true

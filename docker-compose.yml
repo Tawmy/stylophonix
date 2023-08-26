@@ -6,5 +6,3 @@
     build:
       context: .
       dockerfile: Stylophonix/Dockerfile
-    ports:
-      - "80:80"
