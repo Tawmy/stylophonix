@@ -1,0 +1,10 @@
+﻿services:
+  stylophonix:
+    image: stylophonix
+    container_name: stylophonix
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Stylophonix/Dockerfile
+    ports:
+      - "80:80"
