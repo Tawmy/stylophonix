@@ -12,10 +12,19 @@
     height: 100%;
     background: url("img/photos/Stylophonixklein19_black.webp");
     background-size: contain;
+}
 
+.band-photo-animate {
+    animation-name: flash;
+    animation-duration: 2000ms;
+    animation-delay: 250ms;
+    animation-fill-mode: backwards;
+}
+
+.band-photo-animate:after {
     animation-name: fadein;
     animation-duration: 2500ms;
-    animation-delay: 1000ms;
+    animation-delay: 2250ms;
     animation-fill-mode: backwards;
 }
 
@@ -69,7 +78,7 @@
 .social-animate {
     animation-name: fadein;
     animation-duration: 2500ms;
-    animation-delay: 3000ms;
+    animation-delay: 4000ms;
     animation-fill-mode: backwards;
 }
 
@@ -83,4 +92,55 @@
 
 #social-link-SoundCloud img {
     transform: translateY(4px) scale(1.2);
+}
+
+@keyframes flash {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 0;
+    }
+    11% {
+        opacity: 1;
+    }
+    15% {
+        opacity: 1;
+    }
+    16% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 0;
+    }
+    41% {
+        opacity: 1;
+    }
+    45% {
+        opacity: 1;
+    }
+    46% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    51% {
+        opacity: 1;
+    }
+    55% {
+        opacity: 1;
+    }
+    56% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    81% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
 }

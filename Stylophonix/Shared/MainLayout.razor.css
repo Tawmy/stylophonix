@@ -11,6 +11,6 @@
 .logo-fadein {
     animation-name: fadein;
     animation-duration: 2500ms;
-    animation-delay: 2000ms;
+    animation-delay: 3000ms;
     animation-fill-mode: backwards;
 }
