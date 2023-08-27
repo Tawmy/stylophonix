@@ -3,6 +3,8 @@
 
 @if (Gig != null && LoadGigInfo() is {} gigInfo)
 {
+    <PageTitle>Stylophonix | @gigInfo.Title</PageTitle>
+
     <div id="gig-info">
         <span>@gigInfo.Title</span>
         <span>@gigInfo.Subtitle</span>
@@ -17,6 +19,8 @@
 }
 else
 {
+    <PageTitle>Stylophonix | Gig not found</PageTitle>
+
     <span>Es existiert kein Gig mit diesem Titel.</span>
 }
 

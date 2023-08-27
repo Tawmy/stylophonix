@@ -3,6 +3,8 @@
 @using Stylophonix.Interfaces
 @inject IAnimationService AnimationService
 
+<PageTitle>The World of Stylophonix</PageTitle>
+
 <div id="band-photo"></div>
 
 <div id="social" class="@(AnimationService.ShouldAnimate() ? "social-animate" : string.Empty)">
