@@ -4,6 +4,7 @@ using Stylophonix.Services;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddSingleton<IDataService, DataService>();
 builder.Services.AddScoped<IAnimationService, AnimationService>();
 
 var app = builder.Build();
