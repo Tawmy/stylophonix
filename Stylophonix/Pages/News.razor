@@ -1,12 +1,21 @@
 @page "/news"
+@using Stylophonix.Interfaces
+@inject IDataService DataService
 
 <PageTitle>Stylophonix | News</PageTitle>
 
-<img src="img/photos/btr5.jpg" alt="Bandfoto Boom the Room"/>
+@foreach (var newsImage in DataService.GetNewsImages())
+{
+    <img src="@newsImage" alt="@newsImage"/>
+}
 
-<span>
-    STYLOPHONIX MACHEN ERST EINMAL ALS DUO WEITER.<br/>
-    DITZE UND MATTHES WERDEN IHR BESTES GEBEN.<br/>
-    SCHÜRMI BLEIBT NATÜRLICH IN DER BAND.<br/>
-    WIR SEHEN UNS.
-</span>
+
+@foreach (var newsParagraph in DataService.GetNewsParagraphs())
+{
+    <span>
+        @foreach (var line in newsParagraph)
+        {
+            @line<br/>
+        }
+    </span>
+}
