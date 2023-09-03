@@ -69,7 +69,7 @@ public class DataService : IDataService
             var lines = File.ReadLines(file).ToArray();
             var name = lines[0];
             var instruments = lines[1].Split(" ");
-            members.Add(new Member(name, GetMemberPhotoPath(name), instruments));
+            members.Add(new Member(name, GetMemberPhotoPath(Path.GetFileNameWithoutExtension(file)), instruments));
         }
 
         return members;
