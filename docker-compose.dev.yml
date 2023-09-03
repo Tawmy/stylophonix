@@ -1,5 +1,10 @@
 services:
   stylophonix:
+    volumes:
+      - ./data/data/:/app/wwwroot/data
+      - ./data/img/gigs:/app/wwwroot/img/gigs
+      - ./data/img/lineup:/app/wwwroot/img/lineup
+      - ./data/img/news:/app/wwwroot/img/news
     networks:
       - caddy
     labels:
