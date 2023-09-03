@@ -5,6 +5,7 @@ namespace Stylophonix.Services;
 
 public class DataService : IDataService
 {
+    private IEnumerable<PopupMenuOption> _gigInfoNav = new List<PopupMenuOption>();
     private IEnumerable<Member> _members = new List<Member>();
     private IEnumerable<string> _newsImages = Array.Empty<string>();
     private IEnumerable<IEnumerable<string>> _newsParagraphs = new List<IEnumerable<string>>();
@@ -23,6 +24,7 @@ public class DataService : IDataService
         _members = LoadMembers();
         _newsImages = LoadNewsImages();
         _newsParagraphs = LoadNewsParagraphs();
+        _gigInfoNav = LoadGigInfoNav();
     }
 
     public IEnumerable<Member> GetMembers()
@@ -38,6 +40,11 @@ public class DataService : IDataService
     public IEnumerable<IEnumerable<string>> GetNewsParagraphs()
     {
         return _newsParagraphs;
+    }
+
+    public IEnumerable<PopupMenuOption> GetGigInfoForNav()
+    {
+        return _gigInfoNav;
     }
 
     private static IEnumerable<Member> LoadMembers()
@@ -70,6 +77,26 @@ public class DataService : IDataService
         var dataPath = Path.Combine(DataDir, "news");
         var paragraphFiles = Directory.GetFiles(dataPath).OrderBy(x => x);
         return paragraphFiles.OrderDescending().Select(File.ReadAllLines).ToArray();
+    }
+
+    private static IEnumerable<PopupMenuOption> LoadGigInfoNav()
+    {
+        var gigsPath = Path.Combine(DataDir, "gigs");
+        var directories = Directory.GetDirectories(gigsPath);
+
+        var gigs = new Dictionary<int, PopupMenuOption>();
+
+        foreach (var directory in directories)
+        {
+            var navTxt = Path.Combine(directory, "nav.txt");
+            var lines = File.ReadAllLines(navTxt);
+            var popupMenuOption = new PopupMenuOption(lines[0], true, lines[1],
+                $"gigs/{new DirectoryInfo(directory).Name}");
+            var order = int.Parse(lines[2]);
+            gigs.Add(order, popupMenuOption);
+        }
+
+        return gigs.OrderBy(x => x.Key).Select(x => x.Value).ToArray();
     }
 
     private static string GetMemberPhotoPath(string name)

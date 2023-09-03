@@ -11,4 +11,6 @@ public interface IDataService
     public IEnumerable<string> GetNewsImages();
 
     public IEnumerable<IEnumerable<string>> GetNewsParagraphs();
+
+    public IEnumerable<PopupMenuOption> GetGigInfoForNav();
 }

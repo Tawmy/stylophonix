@@ -38,7 +38,7 @@ else
 
         try
         {
-            var wwwroot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pics");
+            var wwwroot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/data/gigs");
             var submittedDirectory = Path.Combine(wwwroot, Gig);
             var lines = File.ReadLines(Path.Combine(submittedDirectory, "info.txt")).ToArray();
             return new GigInfo(lines[0], lines[1]);
@@ -57,12 +57,12 @@ else
             return Array.Empty<string>();
         }
 
-        var wwwroot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pics");
+        var wwwroot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/gigs");
         var submittedDirectory = Path.Combine(wwwroot, Gig);
         var files = Directory.GetFiles(submittedDirectory);
         var filesPrepared = files.Where(x =>
             x.EndsWith(".jpg") || x.EndsWith(".jpeg") || x.EndsWith(".png") || x.EndsWith(".webp") || x.EndsWith(".avif"))
-            .Select(x => $"img/pics/{Gig}/{Path.GetFileName(x)}")
+            .Select(x => $"img/gigs/{Gig}/{Path.GetFileName(x)}")
             .OrderBy(x => x);
         return filesPrepared;
     }

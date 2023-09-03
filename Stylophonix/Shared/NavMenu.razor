@@ -2,9 +2,14 @@
 @using Stylophonix.Interfaces
 @inject NavigationManager NavManager
 @inject IAnimationService AnimationService
+@inject IDataService DataService
 
 <nav class="@(AnimationService.ShouldAnimate() ? "nav-animate" : string.Empty)" @onmouseleave="ClosePopups">
     <div>
+        @if (NavOptions == null)
+        {
+            return;
+        }
         @foreach (var navOption in NavOptions)
         {
             <a @onmouseenter="@(_ => OpenPopup(navOption))" @onmousedown="@(_ => OpenPopup(navOption))" @onclick="@(_ => OpenUrl(navOption))">
@@ -21,14 +26,6 @@
 
 @code {
 
-    private static List<PopupMenuOption> OptionsGigs => new()
-    {
-        new PopupMenuOption("Gigs", true),
-        new PopupMenuOption("World Premiere", true, "13.10.2018", "gigs/2018-world-premiere"),
-        new PopupMenuOption("Draußen nur Kännchen", true, "06.07.2019", "gigs/2019-draussen-kaennchen"),
-        new PopupMenuOption("Boom the Room", true, "03.09.2022", "gigs/2022-boom-the-room")
-    };
-
     private static List<PopupMenuOption> OptionsDownload => new()
     {
         new PopupMenuOption("Downloads", true),
@@ -38,13 +35,29 @@
         new PopupMenuOption("Stageplan", false, Url: "https://www.stylophonix.de/downloads/stylophonixstageplanduo22.pdf")
     };
 
-    private List<NavOption> NavOptions { get; set; } = new()
+    private List<NavOption>? NavOptions { get; set; }
+
+    protected override Task OnInitializedAsync()
     {
-        new NavOption("News", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "news"),
-        new NavOption("Gigs", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", OptionsGigs),
-        new NavOption("Lineup", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "lineup"),
-        new NavOption("Downloads", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", OptionsDownload)
-    };
+        NavOptions = new List<NavOption>
+        {
+            new("News", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "news"),
+            new("Gigs", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", GetGigInfoForNav()),
+            new("Lineup", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "lineup"),
+            new("Downloads", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", OptionsDownload)
+        };
+
+        return base.OnInitializedAsync();
+    }
+
+    private IEnumerable<PopupMenuOption> GetGigInfoForNav()
+    {
+        var header = new PopupMenuOption("Gigs", true);
+        var gigs = DataService.GetGigInfoForNav();
+        var options = new List<PopupMenuOption> {header};
+        options.AddRange(gigs);
+        return options;
+    }
 
     private void OpenPopup(NavOption navOption)
     {
@@ -58,7 +71,7 @@
 
     private void ClosePopups()
     {
-        foreach (var navOption in NavOptions.Where(x => x.PopupMenu != null))
+        foreach (var navOption in NavOptions?.Where(x => x.PopupMenu != null) ?? Array.Empty<NavOption>())
         {
             navOption.PopupMenu!.IsVisible = false;
         }
@@ -66,7 +79,7 @@
 
     private void CloseOtherPopups(NavOption option)
     {
-        foreach (var navOption in NavOptions.Where(x => x.PopupMenu != null && x != option))
+        foreach (var navOption in NavOptions?.Where(x => x.PopupMenu != null && x != option) ?? Array.Empty<NavOption>())
         {
             navOption.PopupMenu!.IsVisible = false;
         }
