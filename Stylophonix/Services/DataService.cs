@@ -15,16 +15,26 @@ public class DataService : IDataService
         LoadData();
     }
 
+    private DateTime? LastLoad { get; set; }
+
     private static string Wwwroot => Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
     private static string DataDir => Path.Combine(Wwwroot, "data");
     private static string ImgDir => Path.Combine(Wwwroot, "img");
 
-    public void LoadData()
+    public bool LoadData()
     {
+        if (LastLoad != null && LastLoad > DateTime.UtcNow.AddSeconds(-30))
+        {
+            return false;
+        }
+
         _members = LoadMembers();
         _newsImages = LoadNewsImages();
         _newsParagraphs = LoadNewsParagraphs();
         _gigInfoNav = LoadGigInfoNav();
+
+        LastLoad = DateTime.UtcNow;
+        return true;
     }
 
     public IEnumerable<Member> GetMembers()
