@@ -3,3 +3,7 @@ span {
     line-height: 2;
     text-align: center;
 }
+
+img:not(:last-of-type) {
+    margin-bottom: var(--main-margin);
+}
