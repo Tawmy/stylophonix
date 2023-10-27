@@ -85,7 +85,8 @@ public class DataService : IDataService
     private static IEnumerable<IEnumerable<string>> LoadNewsParagraphs()
     {
         var dataPath = Path.Combine(DataDir, "news");
-        var paragraphFiles = Directory.GetFiles(dataPath).Where(x => !Path.GetFileName(x).StartsWith(".")).OrderBy(x => x);
+        var paragraphFiles = Directory.GetFiles(dataPath).Where(x => !Path.GetFileName(x).StartsWith("."))
+            .OrderBy(x => x);
         return paragraphFiles.OrderDescending().Select(File.ReadAllLines).ToArray();
     }
 

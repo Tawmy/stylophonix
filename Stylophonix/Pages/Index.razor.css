@@ -75,6 +75,28 @@
     }
 }
 
+#impressum{
+    margin: var(--main-margin);
+    padding: 6px 10px;
+
+    background: var(--blur-background);
+    box-shadow: var(--inset-shadow);
+    border-radius: 100px;
+    font-size: 0.6rem;
+    
+    & a {
+        color: var(--color);
+        text-decoration: none;
+    }
+
+    @media only screen and (min-width: 780px) {
+        position: fixed;
+        margin: calc(var(--main-margin) / 2);
+        bottom: 0;
+        right: 0;
+    }
+}
+
 .social-animate {
     animation-name: fadein;
     animation-duration: 2500ms;
