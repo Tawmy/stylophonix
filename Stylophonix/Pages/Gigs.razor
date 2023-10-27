@@ -13,7 +13,9 @@
     <div id="pics">
         @foreach (var fileUrl in GetFileUrls())
         {
-            <img src="@fileUrl" alt="@Path.GetFileNameWithoutExtension(fileUrl)"/>
+            <a href="@fileUrl">
+                <img src="@fileUrl" alt="@Path.GetFileNameWithoutExtension(fileUrl)"/>
+            </a>
         }
     </div>
 }
