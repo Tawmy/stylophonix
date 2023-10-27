@@ -26,6 +26,6 @@
 img {
     align-self: start;
 
-    max-width: min(600px, calc(100vw - calc(var(--main-margin) * 2)));
-    max-height: 600px;
+    max-width: calc(100vw - calc(var(--main-margin) * 2));
+    max-height: 400px;
 }

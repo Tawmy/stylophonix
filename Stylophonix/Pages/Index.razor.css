@@ -75,7 +75,7 @@
     }
 }
 
-#impressum{
+#impressum {
     margin: var(--main-margin);
     padding: 6px 10px;
 
@@ -83,7 +83,7 @@
     box-shadow: var(--inset-shadow);
     border-radius: 100px;
     font-size: 0.6rem;
-    
+
     & a {
         color: var(--color);
         text-decoration: none;
