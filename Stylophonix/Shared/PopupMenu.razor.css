@@ -26,12 +26,16 @@
         position: absolute;
     }
 
-    & span, & a {
+    & a, & span:first-of-type {
         padding: 0.8em 1.33em;
     }
 
     & span {
         cursor: default;
+    }
+
+    & span:not(:first-of-type) {
+        padding: 0.33em 1.33em;
     }
 
     & span:first-of-type {
