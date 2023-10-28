@@ -5,6 +5,7 @@ services:
       - ./data/img/gigs:/app/wwwroot/img/gigs
       - ./data/img/lineup:/app/wwwroot/img/lineup
       - ./data/img/news:/app/wwwroot/img/news
+      - ./data/img/music:/app/wwwroot/img/music
     networks:
       - caddy
     labels:

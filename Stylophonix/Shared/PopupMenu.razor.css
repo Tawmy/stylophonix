@@ -1,4 +1,4 @@
-div {
+#container {
     display: none;
     white-space: nowrap;
     overflow: hidden;
@@ -47,6 +47,15 @@ div {
         color: white;
         text-decoration: none;
         transition: 300ms;
+
+        display: flex;
+        gap: 12px;
+        align-items: center;
+
+        > img {
+            max-width: 3.4rem;
+            max-height: 3.4rem;
+        }
     }
 
     & a:hover {

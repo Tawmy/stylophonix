@@ -13,4 +13,6 @@ public interface IDataService
     public IEnumerable<IEnumerable<string>> GetNewsParagraphs();
 
     public IEnumerable<PopupMenuOption> GetGigInfoForNav();
+
+    IDictionary<string, IList<PopupMenuOption>> GetMusic();
 }

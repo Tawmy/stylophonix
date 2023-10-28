@@ -1,10 +1,18 @@
 @using Stylophonix.Data
-<div style="display: @GetDisplayProperty()">
+<div id="container" style="display: @GetDisplayProperty()">
     @foreach (var o in PopupMenuOptions)
     {
         @if (o.Url != null)
         {
-            <a href="@o.Url" @onclick="@(_ => IsVisible = false)">@((MarkupString) GetFormattedText(o))</a>
+            <a href="@o.Url" @onclick="@(_ => IsVisible = false)">
+                @if (o.ThumbnailUrl != null)
+                {
+                    <img src="@o.ThumbnailUrl" alt="Thumbnail for @o.Title"/>
+                }
+                <div>
+                    @((MarkupString) GetFormattedText(o))
+                </div>
+            </a>
         }
         else
         {

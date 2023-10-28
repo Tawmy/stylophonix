@@ -7,6 +7,8 @@ public class DataService : IDataService
 {
     private IEnumerable<PopupMenuOption> _gigInfoNav = new List<PopupMenuOption>();
     private IEnumerable<Member> _members = new List<Member>();
+
+    private IDictionary<string, IList<PopupMenuOption>> _music = new Dictionary<string, IList<PopupMenuOption>>();
     private IEnumerable<string> _newsImages = Array.Empty<string>();
     private IEnumerable<IEnumerable<string>> _newsParagraphs = new List<IEnumerable<string>>();
 
@@ -32,6 +34,7 @@ public class DataService : IDataService
         _newsImages = LoadNewsImages();
         _newsParagraphs = LoadNewsParagraphs();
         _gigInfoNav = LoadGigInfoNav();
+        _music = LoadMusic();
 
         LastLoad = DateTime.UtcNow;
         return true;
@@ -55,6 +58,11 @@ public class DataService : IDataService
     public IEnumerable<PopupMenuOption> GetGigInfoForNav()
     {
         return _gigInfoNav;
+    }
+
+    public IDictionary<string, IList<PopupMenuOption>> GetMusic()
+    {
+        return _music;
     }
 
     private static IEnumerable<Member> LoadMembers()
@@ -108,6 +116,27 @@ public class DataService : IDataService
         }
 
         return gigs.OrderBy(x => x.Key).Select(x => x.Value).ToArray();
+    }
+
+    private static IDictionary<string, IList<PopupMenuOption>> LoadMusic()
+    {
+        var musicPath = Path.Combine(DataDir, "music");
+
+        var artists = File.ReadAllLines(Path.Combine(musicPath, "artists.txt")).ToArray();
+        var dict = artists.ToDictionary<string, string, IList<KeyValuePair<PopupMenuOption, int>>>(x => x,
+            x => new List<KeyValuePair<PopupMenuOption, int>>());
+
+        foreach (var file in Directory.GetFiles(musicPath).Where(x =>
+                     !x.StartsWith(".") && x.EndsWith(".txt") && Path.GetFileName(x) != "artists.txt"))
+        {
+            var lines = File.ReadAllLines(file);
+            var thumbnailUrl = Path.Combine("img/music", $"{Path.GetFileNameWithoutExtension(file)}.webp");
+            var album = new PopupMenuOption(lines[1], true, lines[2], lines[4], thumbnailUrl);
+            dict[lines[0]].Add(new KeyValuePair<PopupMenuOption, int>(album, int.Parse(lines[3])));
+        }
+
+        return dict.ToDictionary(x => x.Key,
+            x => x.Value.OrderByDescending(y => y.Value).Select(y => y.Key).ToList() as IList<PopupMenuOption>);
     }
 
     private static string GetMemberPhotoPath(string name)

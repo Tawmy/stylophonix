@@ -21,11 +21,6 @@ nav {
             transform: unset;
         }
 
-        & img {
-            filter: invert(100%);
-            transform: scale(0.8);
-        }
-
         & a {
             display: grid;
             justify-items: center;
@@ -44,6 +39,13 @@ nav {
                 @media only screen and (min-width: 500px) {
                     display: none;
                 }
+            }
+
+            > img {
+                width: 48px;
+                height: 48px;
+                filter: invert(100%);
+                transform: scale(0.8);
             }
         }
     }
