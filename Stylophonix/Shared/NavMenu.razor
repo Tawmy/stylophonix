@@ -29,10 +29,11 @@
     private static List<PopupMenuOption> OptionsDownload => new()
     {
         new PopupMenuOption("Downloads", true),
-        new PopupMenuOption("Photo", false, Url: "https://www.stylophonix.de/downloads/stylo22.jpg"),
-        new PopupMenuOption("Info", false, Url: "https://www.stylophonix.de/downloads/info-2022.pdf"),
-        new PopupMenuOption("Technical Rider", false, Url: "https://www.stylophonix.de/downloads/technicalriderstylophonixduo2022-12-11.pdf"),
-        new PopupMenuOption("Stageplan", false, Url: "https://www.stylophonix.de/downloads/stylophonixstageplanduo22.pdf")
+        new PopupMenuOption("Photo", false, Url: "https://cdn.tawmy.net/stylophonix/downloads/stylo22.jpg"),
+        new PopupMenuOption("Info", false, Url: "https://cdn.tawmy.net/stylophonix/downloads/info-2022.pdf"),
+        new PopupMenuOption("Technical Rider", false, Url: "https://cdn.tawmy.net/stylophonix/downloads/technicalriderstylophonixduo2022-12-11.pdf"),
+        new PopupMenuOption("Stageplan", false, Url: "https://cdn.tawmy.net/stylophonix/downloads/stylophonixstageplanduo22.pdf")
+        // TODO move this into DataService and remove hardcoded URLs
     };
 
     private List<NavOption>? NavOptions { get; set; }
