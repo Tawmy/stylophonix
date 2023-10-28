@@ -27,11 +27,7 @@
     }
 
     & span, & a {
-        padding: 1em 1.6em;
-
-        @media only screen and (min-width: 500px) {
-            padding: 0.8em 1.33em;
-        }
+        padding: 0.8em 1.33em;
     }
 
     & span {
@@ -53,8 +49,13 @@
         align-items: center;
 
         > img {
-            max-width: 3.4rem;
-            max-height: 3.4rem;
+            max-width: 2.6rem;
+            max-height: 2.6rem;
+
+            @media only screen and (min-width: 500px) {
+                max-width: 3.4rem;
+                max-height: 3.4rem;
+            }
         }
     }
 
