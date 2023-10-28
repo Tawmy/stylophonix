@@ -36,6 +36,10 @@
 
     & span:not(:first-of-type) {
         padding: 0.33em 1.33em;
+
+        @media only screen and (min-width: 500px) {
+            padding: 0.8em 1.33em;
+        }
     }
 
     & span:first-of-type {
