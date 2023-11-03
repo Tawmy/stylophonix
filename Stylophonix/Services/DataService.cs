@@ -5,6 +5,7 @@ namespace Stylophonix.Services;
 
 public class DataService : IDataService
 {
+    private IEnumerable<PopupMenuOption> _downloads = new List<PopupMenuOption>();
     private IEnumerable<PopupMenuOption> _gigInfoNav = new List<PopupMenuOption>();
     private IEnumerable<Member> _members = new List<Member>();
 
@@ -35,6 +36,7 @@ public class DataService : IDataService
         _newsParagraphs = LoadNewsParagraphs();
         _gigInfoNav = LoadGigInfoNav();
         _music = LoadMusic();
+        _downloads = LoadDownloads();
 
         LastLoad = DateTime.UtcNow;
         return true;
@@ -63,6 +65,11 @@ public class DataService : IDataService
     public IDictionary<string, IList<PopupMenuOption>> GetMusic()
     {
         return _music;
+    }
+
+    public IEnumerable<PopupMenuOption> GetDownloads()
+    {
+        return _downloads;
     }
 
     private static IEnumerable<Member> LoadMembers()
@@ -137,6 +144,23 @@ public class DataService : IDataService
 
         return dict.ToDictionary(x => x.Key,
             x => x.Value.OrderByDescending(y => y.Value).Select(y => y.Key).ToList() as IList<PopupMenuOption>);
+    }
+
+    private static IEnumerable<PopupMenuOption> LoadDownloads()
+    {
+        var downloadsPath = Path.Combine(DataDir, "downloads");
+
+        var fileDict = new Dictionary<PopupMenuOption, int>();
+
+        foreach (var file in Directory.GetFiles(downloadsPath).Where(x => !x.StartsWith(".") && !x.EndsWith(".txt")))
+        {
+            var lines = File.ReadAllLines(Path.ChangeExtension(file, "txt"));
+            var fileUrl = Path.Combine("data/downloads/", $"{Path.GetFileName(file)}");
+            var popupMenuOption = new PopupMenuOption(lines[0], false, Url: fileUrl);
+            fileDict.Add(popupMenuOption, int.Parse(lines[1]));
+        }
+
+        return fileDict.OrderBy(x => x.Value).Select(x => x.Key).ToArray();
     }
 
     private static string GetMemberPhotoPath(string name)

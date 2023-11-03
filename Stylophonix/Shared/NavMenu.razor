@@ -25,17 +25,6 @@
 </nav>
 
 @code {
-
-    private static List<PopupMenuOption> OptionsDownload => new()
-    {
-        new PopupMenuOption("Downloads", true),
-        new PopupMenuOption("Photo", false, Url: "https://cdn.tawmy.net/stylophonix/downloads/stylo22.jpg"),
-        new PopupMenuOption("Info", false, Url: "https://cdn.tawmy.net/stylophonix/downloads/info-2022.pdf"),
-        new PopupMenuOption("Technical Rider", false, Url: "https://cdn.tawmy.net/stylophonix/downloads/technicalriderstylophonixduo2022-12-11.pdf"),
-        new PopupMenuOption("Stageplan", false, Url: "https://cdn.tawmy.net/stylophonix/downloads/stylophonixstageplanduo22.pdf")
-        // TODO move this into DataService and remove hardcoded URLs
-    };
-
     private List<NavOption>? NavOptions { get; set; }
 
     protected override Task OnInitializedAsync()
@@ -46,7 +35,7 @@
             new("Gigs", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", GetGigInfoForNav()),
             new("Lineup", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "lineup"),
             new("Music", "img/icons/music_note_FILL0_wght400_GRAD0_opsz24.svg", GetMusicForNav()),
-            new("Downloads", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", OptionsDownload)
+            new("Downloads", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", GetDownloadsForNav())
         };
 
         return base.OnInitializedAsync();
@@ -73,6 +62,15 @@
             options.AddRange(bandAlbums.Value);
         }
 
+        return options;
+    }
+
+    private IEnumerable<PopupMenuOption> GetDownloadsForNav()
+    {
+        var header = new PopupMenuOption("Downloads", true);
+        var downloads = DataService.GetDownloads();
+        var options = new List<PopupMenuOption> {header};
+        options.AddRange(downloads);
         return options;
     }
 
