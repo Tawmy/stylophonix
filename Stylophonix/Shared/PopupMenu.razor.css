@@ -53,16 +53,18 @@
         transition: 300ms;
 
         display: flex;
-        gap: 12px;
+        gap: 22px;
         align-items: center;
 
         > img {
-            max-width: 2.6rem;
-            max-height: 2.6rem;
+            max-width: 2rem;
+            max-height: 2rem;
+            transform: scale(1.2);
+            transform-origin: left;
 
             @media only screen and (min-width: 500px) {
-                max-width: 3.4rem;
-                max-height: 3.4rem;
+                max-width: 2.6rem;
+                max-height: 2.6rem;
             }
         }
     }
