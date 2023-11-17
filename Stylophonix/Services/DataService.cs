@@ -122,7 +122,7 @@ public class DataService : IDataService
             gigs.Add(order, popupMenuOption);
         }
 
-        return gigs.OrderBy(x => x.Key).Select(x => x.Value).ToArray();
+        return gigs.OrderByDescending(x => x.Key).Select(x => x.Value).ToArray();
     }
 
     private static IDictionary<string, IList<PopupMenuOption>> LoadMusic()
