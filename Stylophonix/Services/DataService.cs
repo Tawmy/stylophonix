@@ -116,8 +116,9 @@ public class DataService : IDataService
         {
             var navTxt = Path.Combine(directory, "nav.txt");
             var lines = File.ReadAllLines(navTxt);
-            var popupMenuOption = new PopupMenuOption(lines[0], true, lines[1],
-                $"gigs/{new DirectoryInfo(directory).Name}");
+            var externalUrl = lines.ElementAtOrDefault(3);
+            var url = externalUrl ?? $"gigs/{new DirectoryInfo(directory).Name}";
+            var popupMenuOption = new PopupMenuOption(lines[0], true, lines[1], url);
             var order = int.Parse(lines[2]);
             gigs.Add(order, popupMenuOption);
         }
