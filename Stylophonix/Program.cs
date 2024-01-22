@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.StaticFiles;
 using Stylophonix.Interfaces;
 using Stylophonix.Interfaces.Controllers;
 using Stylophonix.Services;
@@ -15,6 +16,14 @@ builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
+var provider = new FileExtensionContentTypeProvider
+{
+    Mappings =
+    {
+        [".avif"] = "image/avif"
+    }
+};
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -26,6 +35,10 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    ContentTypeProvider = provider
+});
 
 app.UseRouting();
 
