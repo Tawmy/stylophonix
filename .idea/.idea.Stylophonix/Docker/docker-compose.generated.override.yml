@@ -2,7 +2,7 @@
 services:
   stylophonix:
     build:
-      context: "/Users/tawmy/Git/Stylophonix"
+      context: "/Users/tawmy/Git/stylophonix"
       dockerfile: "Stylophonix/Dockerfile"
       target: "base"
     command: []
@@ -13,12 +13,10 @@ services:
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net7.0/Stylophonix.staticwebassets.runtime.CT.json"
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
-      NUGET_PACKAGES: "/Users/tawmy/.nuget/packages"
-      NUGET_FALLBACK_PACKAGES: "/Users/tawmy/.nuget/packages"
     image: "stylophonix:dev"
     ports: []
     volumes:
-    - "/Users/tawmy/.nuget/packages:/root/.nuget/fallbackpackages"
-    - "/Users/tawmy/Git/Stylophonix/Stylophonix:/app:rw"
-    - "/Users/tawmy/Git/Stylophonix:/src:rw"
+    - "/Users/tawmy/.nuget/packages:/root/.nuget/packages"
+    - "/Users/tawmy/Git/stylophonix/Stylophonix:/app:rw"
+    - "/Users/tawmy/Git/stylophonix:/src:rw"
     working_dir: "/app"
