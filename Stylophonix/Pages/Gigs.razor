@@ -1,7 +1,7 @@
 @page "/gigs/{gig}"
 @using Stylophonix.Data
 
-@if (Gig != null && LoadGigInfo() is {} gigInfo)
+@if (Gig != null && LoadGigInfo() is { } gigInfo)
 {
     <PageTitle>Stylophonix | @gigInfo.Title</PageTitle>
 
@@ -11,11 +11,21 @@
     </div>
 
     <div id="pics">
-        @foreach (var fileUrl in GetFileUrls())
+        @foreach (var fileUrl in GetImageFileUrls())
         {
             <a href="@fileUrl">
                 <img src="@fileUrl" alt="@Path.GetFileNameWithoutExtension(fileUrl)"/>
             </a>
+        }
+    </div>
+
+    <div id="vids">
+        @foreach (var fileUrl in GetVideoFileUrls())
+        {
+            <video controls>
+                <source src="@fileUrl" type="video/mp4"> <!-- hardcoded mp4, change this if there's other extensions -->
+                Your browser does not support the video tag.
+            </video>
         }
     </div>
 }
@@ -28,8 +38,7 @@ else
 
 @code {
 
-    [Parameter]
-    public string? Gig { get; set; }
+    [Parameter] public string? Gig { get; set; }
 
     private GigInfo? LoadGigInfo()
     {
@@ -52,18 +61,28 @@ else
         return null;
     }
 
-    private IEnumerable<string> GetFileUrls()
+    private IEnumerable<string> GetImageFileUrls()
     {
-        if (Gig == null)
+        return GetFileUrls(["jpg", "jpeg", "png", "webp", "avif"]);
+    }
+
+    private IEnumerable<string> GetVideoFileUrls()
+    {
+        return GetFileUrls(["mp4"]);
+    }
+
+    private IEnumerable<string> GetFileUrls(IEnumerable<string> fileExtensions)
+    {
+        if (Gig is null)
         {
-            return Array.Empty<string>();
+            return [];
         }
 
         var wwwroot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/gigs");
         var submittedDirectory = Path.Combine(wwwroot, Gig);
         var files = Directory.GetFiles(submittedDirectory);
         var filesPrepared = files.Where(x =>
-            x.EndsWith(".jpg") || x.EndsWith(".jpeg") || x.EndsWith(".png") || x.EndsWith(".webp") || x.EndsWith(".avif"))
+                fileExtensions.Any(y => x.EndsWith($".{y}")))
             .Select(x => $"img/gigs/{Gig}/{Path.GetFileName(x)}")
             .OrderBy(x => x);
         return filesPrepared;

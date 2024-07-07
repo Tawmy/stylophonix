@@ -15,7 +15,7 @@
     }
 }
 
-#pics {
+#pics, #vids {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -23,7 +23,11 @@
     margin: 0 var(--main-margin);
 }
 
-img {
+#pics {
+    margin-bottom: var(--main-margin);
+}
+
+img, video {
     align-self: start;
 
     max-width: calc(100vw - calc(var(--main-margin) * 2));
