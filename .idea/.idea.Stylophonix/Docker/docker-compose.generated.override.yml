@@ -8,10 +8,10 @@ services:
     command: []
     entrypoint:
     - "dotnet"
-    - "/app/bin/Debug/net7.0/Stylophonix.dll"
+    - "/app/bin/Debug/net8.0/Stylophonix.dll"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
-      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net7.0/Stylophonix.staticwebassets.runtime.CT.json"
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net8.0/Stylophonix.staticwebassets.runtime.CT.json"
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
     image: "stylophonix:dev"
     ports: []

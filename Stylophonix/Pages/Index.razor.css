@@ -104,10 +104,6 @@
     animation-fill-mode: backwards;
 }
 
-#social-link-Twitter img {
-    transform: scale(0.9);
-}
-
 #social-link-Reverbnation img {
     transform: scale(1.1);
 }
