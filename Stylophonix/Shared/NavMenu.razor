@@ -12,7 +12,8 @@
         }
         @foreach (var navOption in NavOptions)
         {
-            <a @onmouseenter="@(_ => OpenPopup(navOption))" @onmousedown="@(_ => OpenPopup(navOption))" @onclick="@(_ => OpenUrl(navOption))">
+            <a @onmouseenter="@(_ => OpenPopup(navOption))" @onmousedown="@(_ => OpenPopup(navOption))"
+               @onclick="@(_ => OpenUrl(navOption))">
                 <img src="@navOption.IconUrl" alt="@navOption.Text"/>
                 <span>@navOption.Text</span>
                 @if (navOption.Options != null)
@@ -45,7 +46,7 @@
     {
         var header = new PopupMenuOption("Gigs", true);
         var gigs = DataService.GetGigInfoForNav();
-        var options = new List<PopupMenuOption> {header};
+        var options = new List<PopupMenuOption> { header };
         options.AddRange(gigs);
         return options;
     }
@@ -54,7 +55,7 @@
     {
         var header = new PopupMenuOption("Music", true);
         var music = DataService.GetMusic();
-        var options = new List<PopupMenuOption> {header};
+        var options = new List<PopupMenuOption> { header };
 
         foreach (var bandAlbums in music)
         {
@@ -69,7 +70,7 @@
     {
         var header = new PopupMenuOption("Downloads", true);
         var downloads = DataService.GetDownloads();
-        var options = new List<PopupMenuOption> {header};
+        var options = new List<PopupMenuOption> { header };
         options.AddRange(downloads);
         return options;
     }

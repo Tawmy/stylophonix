@@ -15,7 +15,7 @@
     <span>
         @foreach (var line in newsParagraph)
         {
-            @line<br/>
+            @((MarkupString)line)<br/>
         }
     </span>
 }

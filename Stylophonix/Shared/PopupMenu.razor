@@ -10,21 +10,20 @@
                     <img src="@o.ThumbnailUrl" alt="Thumbnail for @o.Title"/>
                 }
                 <div>
-                    @((MarkupString) GetFormattedText(o))
+                    @((MarkupString)GetFormattedText(o))
                 </div>
             </a>
         }
         else
         {
-            <span>@((MarkupString) GetFormattedText(o))</span>
+            <span>@((MarkupString)GetFormattedText(o))</span>
         }
     }
 </div>
 
 @code {
 
-    [Parameter]
-    public required IEnumerable<PopupMenuOption> PopupMenuOptions { get; set; } = new List<PopupMenuOption>();
+    [Parameter] public required IEnumerable<PopupMenuOption> PopupMenuOptions { get; set; } = new List<PopupMenuOption>();
 
     public bool IsVisible { get; set; }
 
@@ -40,6 +39,7 @@
         {
             s = $"{s}<br />{o.Subtitle}";
         }
+
         return s;
     }
 
