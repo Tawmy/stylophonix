@@ -7,7 +7,11 @@
 
     <div id="gig-info">
         <span>@gigInfo.Title</span>
-        <span>@gigInfo.Subtitle</span>
+        @foreach (var paragraph in gigInfo.Paragraphs)
+        {
+            <span>@((MarkupString)paragraph)</span>
+        }
+
     </div>
 
     <div id="pics">
@@ -52,7 +56,7 @@ else
             var wwwroot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/data/gigs");
             var submittedDirectory = Path.Combine(wwwroot, Gig);
             var lines = File.ReadLines(Path.Combine(submittedDirectory, "info.txt")).ToArray();
-            return new GigInfo(lines[0], lines[1]);
+            return new GigInfo(lines[0], lines.Skip(1));
         }
         catch (Exception e) when (e is DirectoryNotFoundException or FileNotFoundException)
         {
