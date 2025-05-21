@@ -2,7 +2,7 @@
 services:
   stylophonix:
     build:
-      context: "/Users/tawmy/Git/stylophonix"
+      context: "/Users/tawmy/Git/Stylophonix/stylophonix"
       dockerfile: "Stylophonix/Dockerfile"
       target: "base"
     command: []
@@ -16,7 +16,7 @@ services:
     image: "stylophonix:dev"
     ports: []
     volumes:
+    - "/Users/tawmy/Git/Stylophonix/stylophonix/Stylophonix:/app:rw"
+    - "/Users/tawmy/Git/Stylophonix/stylophonix:/src:rw"
     - "/Users/tawmy/.nuget/packages:/root/.nuget/packages"
-    - "/Users/tawmy/Git/stylophonix/Stylophonix:/app:rw"
-    - "/Users/tawmy/Git/stylophonix:/src:rw"
     working_dir: "/app"
