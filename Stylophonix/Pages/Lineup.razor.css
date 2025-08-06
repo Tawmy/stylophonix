@@ -19,6 +19,7 @@
 
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
+    background: var(--blur-background);
 
     & span:first-of-type {
         font-size: 140%;
