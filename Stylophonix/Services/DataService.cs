@@ -117,13 +117,28 @@ public class DataService : IDataService
             var navTxt = Path.Combine(directory, "nav.txt");
             var lines = File.ReadAllLines(navTxt);
             var externalUrl = lines.ElementAtOrDefault(3);
-            var url = externalUrl ?? $"gigs/{new DirectoryInfo(directory).Name}";
+            var gig = new DirectoryInfo(directory).Name;
+            var url = externalUrl ?? $"gigs/{gig}";
             var order = int.Parse(lines[2]);
-            var gigInfo = new GigInfo(lines[0], lines[1], url, order);
+            var details = LoadGigDetails(gig);
+            var images = GetGigImageFileUrls(gig);
+            var videos = GetGigVideoFileUrls(gig);
+            var gigInfo = new GigInfo
+            {
+                Id = gig,
+                NavTitle = lines[0],
+                NavSubtitle = lines[1],
+                Url = url,
+                NavOrder = order,
+                ImageUrls = images,
+                VideoUrls = videos,
+                Title = details?.Title ?? string.Empty,
+                Paragraphs = details?.Paragraphs ?? []
+            };
             gigs.Add(gigInfo);
         }
 
-        return gigs.OrderByDescending(x => x.Order).ToArray();
+        return gigs.OrderByDescending(x => x.NavOrder).ToArray();
     }
 
     private static IDictionary<string, IList<PopupMenuOption>> LoadMusic()
@@ -173,4 +188,46 @@ public class DataService : IDataService
     {
         return Path.Combine("img/news", Path.GetFileName(filePath));
     }
+
+    #region Gig Details
+
+    private static GigDetails? LoadGigDetails(string gig)
+    {
+        try
+        {
+            var wwwroot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/data/gigs");
+            var submittedDirectory = Path.Combine(wwwroot, gig);
+            var lines = File.ReadLines(Path.Combine(submittedDirectory, "info.txt")).ToArray();
+            return new GigDetails(lines[0], lines.Skip(1));
+        }
+        catch (Exception e) when (e is DirectoryNotFoundException or FileNotFoundException)
+        {
+        }
+
+        return null;
+    }
+
+    private static IEnumerable<string> GetGigImageFileUrls(string gig)
+    {
+        return GetGigFileUrls(gig, ["jpg", "jpeg", "png", "webp", "avif"]);
+    }
+
+    private static IEnumerable<string> GetGigVideoFileUrls(string gig)
+    {
+        return GetGigFileUrls(gig, ["mp4"]);
+    }
+
+    private static IEnumerable<string> GetGigFileUrls(string gig, IEnumerable<string> fileExtensions)
+    {
+        var wwwroot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/gigs");
+        var submittedDirectory = Path.Combine(wwwroot, gig);
+        var files = Directory.GetFiles(submittedDirectory);
+        var filesPrepared = files.Where(x =>
+                fileExtensions.Any(y => x.EndsWith($".{y}")))
+            .Select(x => $"img/gigs/{gig}/{Path.GetFileName(x)}")
+            .OrderBy(x => x);
+        return filesPrepared;
+    }
+
+    #endregion
 }

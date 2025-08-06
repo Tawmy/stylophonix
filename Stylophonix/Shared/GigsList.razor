@@ -8,8 +8,19 @@
         @foreach (var gig in GigInfos)
         {
             <a class="gig" href="@gig.Url">
-                <div class="title">@gig.Title</div>
-                <div class="subtitle">@gig.Subtitle</div>
+                <div class="text">
+                    <div class="title">@gig.NavTitle</div>
+                    <div class="subtitle">@gig.NavSubtitle</div>
+                </div>
+                <div class="images">
+                    @for (var i = 2; i >= 0; i--)
+                    {
+                        if (gig.ImageUrls.ElementAtOrDefault(i) is { } image)
+                        {
+                            <img src="@image" alt="@($"Preview Image {i}")"/>
+                        }
+                    }
+                </div>
             </a>
         }
     </div>
