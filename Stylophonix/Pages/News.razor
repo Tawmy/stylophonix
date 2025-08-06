@@ -4,11 +4,12 @@
 
 <PageTitle>Stylophonix | News</PageTitle>
 
+<h1>News</h1>
+
 @foreach (var newsImage in DataService.GetNewsImages())
 {
     <img src="@newsImage" alt="@newsImage"/>
 }
-
 
 @foreach (var newsParagraph in DataService.GetNewsParagraphs())
 {
