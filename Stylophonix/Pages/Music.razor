@@ -5,32 +5,34 @@
 
 <h1>Music</h1>
 
-<div class="container">
-    @foreach (var (band, albums) in _musics)
-    {
-        <div class="band">
-            <h2>@band</h2>
-            @foreach (var album in albums)
-            {
-                <a class="album" href="@album.Url">
-                    <img src="@album.ThumbnailUrl" alt="Album cover for album @album.Title"/>
-                    <div class="text">
-                        <div class="title">
-                            @album.Title
+@if (_musics is not null)
+{
+    <div class="container">
+        @foreach (var (band, albums) in _musics)
+        {
+            <div class="band">
+                <h2>@band</h2>
+                @foreach (var album in albums)
+                {
+                    <a class="album" href="@album.Url">
+                        <img src="@album.ThumbnailUrl" alt="Album cover for album @album.Title"/>
+                        <div class="text">
+                            <div class="title">
+                                @album.Title
+                            </div>
+                            <div class="subtitle">
+                                @album.Subtitle
+                            </div>
                         </div>
-                        <div class="subtitle">
-                            @album.Subtitle
-                        </div>
-                    </div>
-                </a>
-            }
-        </div>
-    }
-</div>
-
+                    </a>
+                }
+            </div>
+        }
+    </div>
+}
 
 @code {
-    private IDictionary<string, IList<PopupMenuOption>> _musics;
+    private IDictionary<string, IList<PopupMenuOption>>? _musics;
 
     protected override void OnInitialized()
     {
