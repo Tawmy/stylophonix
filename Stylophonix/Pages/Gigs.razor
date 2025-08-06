@@ -1,7 +1,8 @@
 @page "/gigs/{gig}"
+@page "/gigs"
 @using Stylophonix.Data
 
-@if (Gig != null && LoadGigInfo() is { } gigInfo)
+@if (Gig != null && LoadGigDetails() is { } gigInfo)
 {
     <PageTitle>Stylophonix | @gigInfo.Title</PageTitle>
 
@@ -35,16 +36,16 @@
 }
 else
 {
-    <PageTitle>Stylophonix | Gig not found</PageTitle>
+    <PageTitle>Stylophonix | Gigs</PageTitle>
 
-    <span>Es existiert kein Gig mit diesem Titel.</span>
+    <GigsList/>
 }
 
 @code {
 
     [Parameter] public string? Gig { get; set; }
 
-    private GigInfo? LoadGigInfo()
+    private GigDetails? LoadGigDetails()
     {
         if (Gig == null)
         {
@@ -56,7 +57,7 @@ else
             var wwwroot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/data/gigs");
             var submittedDirectory = Path.Combine(wwwroot, Gig);
             var lines = File.ReadLines(Path.Combine(submittedDirectory, "info.txt")).ToArray();
-            return new GigInfo(lines[0], lines.Skip(1));
+            return new GigDetails(lines[0], lines.Skip(1));
         }
         catch (Exception e) when (e is DirectoryNotFoundException or FileNotFoundException)
         {

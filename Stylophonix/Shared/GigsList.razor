@@ -1,0 +1,26 @@
+@using Stylophonix.Data
+@using Stylophonix.Interfaces
+@inject IDataService DataService
+
+@if (GigInfos is not null)
+{
+    <div class="gigs">
+        @foreach (var gig in GigInfos)
+        {
+            <a class="gig" href="@gig.Url">
+                <div class="title">@gig.Title</div>
+                <div class="subtitle">@gig.Subtitle</div>
+            </a>
+        }
+    </div>
+}
+
+@code {
+    private IEnumerable<GigInfo>? GigInfos { get; set; }
+
+    protected override void OnInitialized()
+    {
+        GigInfos = DataService.GetGigInfo();
+    }
+
+}

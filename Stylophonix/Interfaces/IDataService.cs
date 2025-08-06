@@ -12,7 +12,7 @@ public interface IDataService
 
     public IEnumerable<IEnumerable<string>> GetNewsParagraphs();
 
-    public IEnumerable<PopupMenuOption> GetGigInfoForNav();
+    public IEnumerable<GigInfo> GetGigInfo();
 
     IDictionary<string, IList<PopupMenuOption>> GetMusic();
 

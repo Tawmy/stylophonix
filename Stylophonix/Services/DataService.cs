@@ -6,7 +6,7 @@ namespace Stylophonix.Services;
 public class DataService : IDataService
 {
     private IEnumerable<PopupMenuOption> _downloads = new List<PopupMenuOption>();
-    private IEnumerable<PopupMenuOption> _gigInfoNav = new List<PopupMenuOption>();
+    private IEnumerable<GigInfo> _gigInfo = new List<GigInfo>();
     private IEnumerable<Member> _members = new List<Member>();
 
     private IDictionary<string, IList<PopupMenuOption>> _music = new Dictionary<string, IList<PopupMenuOption>>();
@@ -34,7 +34,7 @@ public class DataService : IDataService
         _members = LoadMembers();
         _newsImages = LoadNewsImages();
         _newsParagraphs = LoadNewsParagraphs();
-        _gigInfoNav = LoadGigInfoNav();
+        _gigInfo = LoadGigInfo();
         _music = LoadMusic();
         _downloads = LoadDownloads();
 
@@ -57,9 +57,9 @@ public class DataService : IDataService
         return _newsParagraphs;
     }
 
-    public IEnumerable<PopupMenuOption> GetGigInfoForNav()
+    public IEnumerable<GigInfo> GetGigInfo()
     {
-        return _gigInfoNav;
+        return _gigInfo;
     }
 
     public IDictionary<string, IList<PopupMenuOption>> GetMusic()
@@ -105,12 +105,12 @@ public class DataService : IDataService
         return paragraphFiles.OrderDescending().Select(File.ReadAllLines).ToArray();
     }
 
-    private static IEnumerable<PopupMenuOption> LoadGigInfoNav()
+    private static IEnumerable<GigInfo> LoadGigInfo()
     {
         var gigsPath = Path.Combine(DataDir, "gigs");
         var directories = Directory.GetDirectories(gigsPath);
 
-        var gigs = new Dictionary<int, PopupMenuOption>();
+        var gigs = new List<GigInfo>();
 
         foreach (var directory in directories)
         {
@@ -118,19 +118,19 @@ public class DataService : IDataService
             var lines = File.ReadAllLines(navTxt);
             var externalUrl = lines.ElementAtOrDefault(3);
             var url = externalUrl ?? $"gigs/{new DirectoryInfo(directory).Name}";
-            var popupMenuOption = new PopupMenuOption(lines[0], true, lines[1], url);
             var order = int.Parse(lines[2]);
-            gigs.Add(order, popupMenuOption);
+            var gigInfo = new GigInfo(lines[0], lines[1], url, order);
+            gigs.Add(gigInfo);
         }
 
-        return gigs.OrderByDescending(x => x.Key).Select(x => x.Value).ToArray();
+        return gigs.OrderByDescending(x => x.Order).ToArray();
     }
 
     private static IDictionary<string, IList<PopupMenuOption>> LoadMusic()
     {
         var musicPath = Path.Combine(DataDir, "music");
 
-        var artists = File.ReadAllLines(Path.Combine(musicPath, "artists.txt")).ToArray();
+        var artists = File.ReadAllLines(Path.Combine(musicPath, "artists.txt"));
         var dict = artists.ToDictionary<string, string, IList<KeyValuePair<PopupMenuOption, int>>>(x => x,
             x => new List<KeyValuePair<PopupMenuOption, int>>());
 

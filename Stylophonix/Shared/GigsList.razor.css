@@ -1,0 +1,33 @@
+
+.gigs {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    margin: 0 var(--main-margin);
+
+    .gig {
+        box-sizing: border-box;
+        padding: 1em 2em;
+        display: flex;
+        flex-direction: column;
+        gap: 0.33em;
+
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+
+        text-decoration: none;
+        transition: 500ms;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transition: 150ms;
+        }
+
+        .title {
+            font-size: 1.15em;
+            font-weight: bold;
+        }
+    }
+}

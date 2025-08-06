@@ -33,22 +33,13 @@
         NavOptions = new List<NavOption>
         {
             new("News", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "news"),
-            new("Gigs", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", GetGigInfoForNav()),
+            new("Gigs", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", "gigs"),
             new("Lineup", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "lineup"),
             new("Music", "img/icons/music_note_FILL0_wght400_GRAD0_opsz24.svg", GetMusicForNav()),
             new("Downloads", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", GetDownloadsForNav())
         };
 
         return base.OnInitializedAsync();
-    }
-
-    private IEnumerable<PopupMenuOption> GetGigInfoForNav()
-    {
-        var header = new PopupMenuOption("Gigs", true);
-        var gigs = DataService.GetGigInfoForNav();
-        var options = new List<PopupMenuOption> { header };
-        options.AddRange(gigs);
-        return options;
     }
 
     private IList<PopupMenuOption> GetMusicForNav()
