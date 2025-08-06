@@ -1,0 +1,54 @@
+.container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    margin: 0 var(--main-margin);
+
+    .band {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        h2 {
+            text-align: center;
+            margin-top: 2em;
+            margin-bottom: 0.5em;
+        }
+
+        .album {
+            box-sizing: border-box;
+            padding: 1em;
+            display: grid;
+            grid-template-columns: 4em 1fr;
+            gap: 1em;
+            align-items: center;
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+
+            text-decoration: none;
+            transition: 500ms;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.15);
+                transition: 150ms;
+            }
+
+            .text {
+                display: flex;
+                flex-direction: column;
+                gap: 0.33em;
+
+                .title {
+                    font-size: 1.15em;
+                    font-weight: bold;
+                }
+            }
+        }
+
+
+    }
+}

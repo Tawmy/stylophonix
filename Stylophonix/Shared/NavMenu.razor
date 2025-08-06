@@ -35,26 +35,11 @@
             new("News", "img/icons/feed_FILL0_wght400_GRAD0_opsz48.svg", "news"),
             new("Gigs", "img/icons/image_FILL0_wght400_GRAD0_opsz48.svg", "gigs"),
             new("Lineup", "img/icons/group_FILL0_wght400_GRAD0_opsz48.svg", "lineup"),
-            new("Music", "img/icons/music_note_FILL0_wght400_GRAD0_opsz24.svg", GetMusicForNav()),
+            new("Music", "img/icons/music_note_FILL0_wght400_GRAD0_opsz24.svg", "music"),
             new("Downloads", "img/icons/download_FILL0_wght400_GRAD0_opsz48.svg", GetDownloadsForNav())
         };
 
         return base.OnInitializedAsync();
-    }
-
-    private IList<PopupMenuOption> GetMusicForNav()
-    {
-        var header = new PopupMenuOption("Music", true);
-        var music = DataService.GetMusic();
-        var options = new List<PopupMenuOption> { header };
-
-        foreach (var bandAlbums in music)
-        {
-            options.Add(new PopupMenuOption(bandAlbums.Key, true));
-            options.AddRange(bandAlbums.Value);
-        }
-
-        return options;
     }
 
     private IEnumerable<PopupMenuOption> GetDownloadsForNav()
