@@ -115,6 +115,12 @@ public class DataService : IDataService
         foreach (var directory in directories)
         {
             var navTxt = Path.Combine(directory, "nav.txt");
+
+            if (!File.Exists(navTxt))
+            {
+                continue;
+            }
+
             var lines = File.ReadAllLines(navTxt);
             var externalUrl = lines.ElementAtOrDefault(3);
             var gig = new DirectoryInfo(directory).Name;
