@@ -1,7 +1,10 @@
 services:
   stylophonix:
+    networks:
+      - reverse-proxy
     labels:
       caddy: stylophonix.de
+      caddy.reverse_proxy: "{{upstreams 8080}}"
   
   filebrowser:
     image: filebrowser/filebrowser
