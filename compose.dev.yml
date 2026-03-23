@@ -1,6 +1,6 @@
 services:
   stylophonix:
-    image: ghcr.io/tawmy/stylophonix:feature-build
+    image: ghcr.io/tawmy/stylophonix:main
     volumes:
       - /opt/stylophonix/data:/app/wwwroot/data
       - /opt/stylophonix/img/gigs:/app/wwwroot/img/gigs
