@@ -1,17 +1,19 @@
 services:
   stylophonix:
+    image: stylophonix
+    build:
+      context: .
+      dockerfile: Stylophonix/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      LOGGING__LOGLEVEL__DEFAULT: Debug
+      LOGGING__LOGLEVEL__MICROSOFT.ASPNETCORE: Debug
     volumes:
       - ./data/data/:/app/wwwroot/data
       - ./data/img/gigs:/app/wwwroot/img/gigs
       - ./data/img/lineup:/app/wwwroot/img/lineup
       - ./data/img/news:/app/wwwroot/img/news
       - ./data/img/music:/app/wwwroot/img/music
-    networks:
-      - caddy
     labels:
-      caddy: stylophonix.tawmy.dev
-      caddy.reverse_proxy: "{{upstreams 8080}}"
-
-networks:
-  caddy:
-    external: true
+      - dev.orbstack.domains=stylophonix.local
