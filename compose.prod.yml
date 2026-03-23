@@ -9,7 +9,7 @@ services:
     networks:
       - reverse-proxy
     labels:
-      caddy: stylophonix.de
+      caddy: stylophonix.de, www.stylophonix.de
       caddy.reverse_proxy: "{{upstreams 8080}}"
   
   filebrowser:
