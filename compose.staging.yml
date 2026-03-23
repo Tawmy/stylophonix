@@ -1,4 +1,14 @@
 services:
   stylophonix:
+    volumes:
+      - /opt/stylophonix/data/data:/app/wwwroot/data
+      - /opt/stylophonix/data/img/gigs:/app/wwwroot/img/gigs
+      - /opt/stylophonix/data/img/lineup:/app/wwwroot/img/lineup
+      - /opt/stylophonix/data/img/news:/app/wwwroot/img/news
+      - /opt/stylophonix/data/img/music:/app/wwwroot/img/music
     labels:
       caddy: staging.stylophonix.de
+  
+  filebrowser:
+    volumes:
+      - /opt/stylophonix/data:/srv

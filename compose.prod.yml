@@ -1,5 +1,11 @@
 services:
   stylophonix:
+    volumes:
+      - /mnt/cdn/stylophonix/data/data/:/app/wwwroot/data
+      - /mnt/cdn/stylophonix/data/img/gigs:/app/wwwroot/img/gigs
+      - /mnt/cdn/stylophonix/data/img/lineup:/app/wwwroot/img/lineup
+      - /mnt/cdn/stylophonix/data/img/news:/app/wwwroot/img/news
+      - /mnt/cdn/stylophonix/data/img/music:/app/wwwroot/img/music
     networks:
       - reverse-proxy
     labels:
@@ -11,8 +17,8 @@ services:
     container_name: stylophonix-filebrowser
     restart: unless-stopped
     volumes:
-      - /opt/stylophonix/data:/srv
-      - /opt/stylophonix/filebrowser/database.db:/database.db
+      - /mnt/cdn/stylophonix/data:/srv
+      - /opt/stylophonix/filebrowser:/database
     networks:
       - reverse-proxy
     labels:
