@@ -1,13 +1,14 @@
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.StaticFiles;
+using Stylophonix;
 using Stylophonix.Interfaces;
 using Stylophonix.Interfaces.Controllers;
 using Stylophonix.Services;
 using Stylophonix.Services.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
 builder.Services.AddSingleton<IDataService, DataService>();
 builder.Services.AddScoped<IAnimationService, AnimationService>();
 builder.Services.AddScoped<IDataControllerService, DataControllerService>();
@@ -42,8 +43,11 @@ app.UseStaticFiles(new StaticFileOptions
 
 app.UseRouting();
 
+app.UseAntiforgery();
+
 app.MapControllers();
-app.MapBlazorHub();
-app.MapFallbackToPage("/_Host");
+app.MapStaticAssets();
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
 
 app.Run();

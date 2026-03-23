@@ -1,0 +1,17 @@
+services:
+  stylophonix:
+    labels:
+      caddy: stylophonix.de
+  
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: stylophonix-filebrowser
+    restart: unless-stopped
+    volumes:
+      - /opt/stylophonix/data:/srv
+      - /opt/stylophonix/filebrowser/database.db:/database.db
+    networks:
+      - reverse-proxy
+    labels:
+      caddy: ${EXTERNAL_URL_FILEBROWSER}
+      caddy.reverse_proxy: "{{upstreams 80}}"
