@@ -15,3 +15,7 @@ services:
     labels:
       caddy: ${EXTERNAL_URL_FILEBROWSER}
       caddy.reverse_proxy: "{{upstreams 80}}"
+
+networks:
+  reverse-proxy:
+    external: true
