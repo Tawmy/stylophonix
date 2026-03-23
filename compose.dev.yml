@@ -1,0 +1,15 @@
+services:
+  stylophonix:
+    image: ghcr.io/tawmy/stylophonix:main
+    volumes:
+      - /opt/stylophonix/data:/app/wwwroot/data
+      - /opt/stylophonix/img:/app/wwwroot/img
+    networks:
+      - reverse-proxy
+    labels:
+      caddy: stylophonix.tawmy.dev
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+
+networks:
+  reverse-proxy:
+    external: true
