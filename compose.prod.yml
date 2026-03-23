@@ -1,7 +1,7 @@
 services:
   stylophonix:
     labels:
-      caddy: staging.stylophonix.de
+      caddy: stylophonix.de
   
   filebrowser:
     image: filebrowser/filebrowser

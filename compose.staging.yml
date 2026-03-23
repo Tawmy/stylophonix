@@ -1,4 +1,4 @@
 services:
   stylophonix:
     labels:
-      caddy: stylophonix.de
+      caddy: staging.stylophonix.de
