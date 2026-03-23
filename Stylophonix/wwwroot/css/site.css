@@ -65,6 +65,36 @@ a {
     color: unset;
 }
 
+.icon:before {
+    position: relative;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.33em;
+    content: '';
+    transform: translateY(0.1em);
+}
+
+.icon-youtube:before {
+    background: url("../img/icons/yt_icon_white_digital_1.png") center/contain no-repeat;
+}
+
+.icon-facebook:before {
+    background: url("../img/icons/f_logo_RGB-White_1024.svg") center/contain no-repeat;
+}
+
+.icon-instagram:before {
+    background: url("../img/icons/Instagram_Glyph_White.svg") center/contain no-repeat;
+}
+
+.icon-reverbnation:before {
+    background: url("../img/icons/reverbnation.svg") center/contain no-repeat;
+}
+
+.icon-soundcloud:before {
+    background: url("../img/icons/SoundCloud_-_Logo.svg") center/contain no-repeat;
+}
+
 @keyframes fadein {
     0% {
         opacity: 0;
