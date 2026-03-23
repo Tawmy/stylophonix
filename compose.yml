@@ -2,7 +2,7 @@
   stylophonix:
     image: ghcr.io/tawmy/stylophonix:1.0.0
     container_name: stylophonix
-    restart: unless-stopped      
+    restart: unless-stopped
     environment:
       ASPNETCORE_ENVIRONMENT:
       LOGGING__LOGLEVEL__DEFAULT: Information
