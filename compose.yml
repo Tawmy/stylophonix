@@ -1,6 +1,6 @@
 ﻿services:
   stylophonix:
-    image: ghcr.io/tawmy/stylophonix:1.0.0
+    image: ghcr.io/tawmy/stylophonix:1.1.1
     container_name: stylophonix
     restart: unless-stopped
     environment:
