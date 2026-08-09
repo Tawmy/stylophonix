@@ -1,9 +1,0 @@
-﻿services:
-  stylophonix:
-    image: ghcr.io/tawmy/stylophonix:1.1.1
-    container_name: stylophonix
-    restart: unless-stopped
-    environment:
-      ASPNETCORE_ENVIRONMENT:
-      LOGGING__LOGLEVEL__DEFAULT: Information
-      LOGGING__LOGLEVEL__MICROSOFT.ASPNETCORE: Warning
