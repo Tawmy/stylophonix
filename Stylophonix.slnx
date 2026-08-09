@@ -1,0 +1,7 @@
+<Solution>
+    <Folder Name="/Solution Items/">
+        <File Path="compose.yml"/>
+    </Folder>
+    <Project Path="Stylophonix/Stylophonix.Client/Stylophonix.Client.csproj"/>
+    <Project Path="Stylophonix/Stylophonix/Stylophonix.csproj"/>
+</Solution>

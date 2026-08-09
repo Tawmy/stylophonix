@@ -1,0 +1,9 @@
+﻿services:
+  backend:
+    image: stylophonix
+    build:
+      context: .
+      dockerfile: Stylophonix/Stylophonix/Dockerfile
+    environment:
+      LOGGING__LOGLEVEL__DEFAULT: Information
+      LOGGING__LOGLEVEL__MICROSOFT.ASPNETCORE: Warning
